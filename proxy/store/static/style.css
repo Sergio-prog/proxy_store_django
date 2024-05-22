@@ -1,0 +1,65 @@
+.css-selector {
+    background: linear-gradient(299deg, #50aa83, #0e467d);
+    background-size: 400% 400%;
+
+    -webkit-animation: BackgroundGradient 0s ease infinite;
+    -moz-animation: BackgroundGradient 0s ease infinite;
+    -o-animation: BackgroundGradient 0s ease infinite;
+    animation: BackgroundGradient 0s ease infinite;
+}
+
+@-webkit-keyframes BackgroundGradient {
+    0%{background-position:0% 63%}
+    50%{background-position:100% 38%}
+    100%{background-position:0% 63%}
+}
+@-moz-keyframes BackgroundGradient {
+    0%{background-position:0% 63%}
+    50%{background-position:100% 38%}
+    100%{background-position:0% 63%}
+}
+@-o-keyframes BackgroundGradient {
+    0%{background-position:0% 63%}
+    50%{background-position:100% 38%}
+    100%{background-position:0% 63%}
+}
+@keyframes BackgroundGradient {
+    0%{background-position:0% 63%}
+    50%{background-position:100% 38%}
+    100%{background-position:0% 63%}
+}
+
+p {
+    font-size: 16px
+}
+
+.index-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.auth-form {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logout-form {
+    margin: 10px 10px;
+}
+
+.btn-index-form {
+    width: 160px;
+    height: 40px;
+    align-content: center;
+    font-size: 18px;
+    margin-top: 10px;
+}
