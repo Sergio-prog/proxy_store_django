@@ -1,9 +1,20 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
+from django.http import HttpResponse, HttpResponseBadRequest
+
+
+class InsufficientBalance(Exception):
+    def __init__(self, balance: int = 0, expected_amount: int = 0, *, message: str | None = None):
+        _message = message or f"Insufficient Balance. Current balance is {balance}. Needs at least {expected_amount}"
+        super().__init__(_message)
 
 
 class CustomUser(AbstractUser):
-    balance = 0
+    balance = models.PositiveIntegerField(default=0)
+
+    def check_balance(self, amount: int):
+        """Indicates whether the user has the ability to pay a payment with this amount."""
+        return self.balance >= amount
 
     class Meta(AbstractUser.Meta):
         swappable = "AUTH_USER_MODEL"
@@ -19,10 +30,13 @@ class ProductStatus(models.TextChoices):
 
 
 class Payment(models.Model):
-    createdAt = models.DateTimeField("date published")
+    created_at = models.DateTimeField("date published", auto_now=True)
     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     side = models.TextField(choices=PaymentSides)
     amount = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.side}: {self.amount} ({self.user})"
 
 
 class Product(models.Model):
@@ -31,3 +45,7 @@ class Product(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     status = models.TextField(choices=ProductStatus, default=ProductStatus.Active)
     in_stock = models.PositiveIntegerField(default=0)
+    price = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name

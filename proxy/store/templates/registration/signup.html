@@ -3,7 +3,7 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<div class="index-form">
+<div class="index-form rounded-box">
   <h2><b>Sign up</b></h2>
   <form class="auth-form" method="post">
     {% csrf_token %}
@@ -11,7 +11,7 @@
       <div>
         <label for="id_username">Username:</label>
         <div class="helptext" id="id_username_helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
-        <input class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" aria-describedby="id_username_helptext" id="id_username">
+        <input style="width: 470px" class="form-control" type="text" name="username" autocapitalize="none" autocomplete="username" autofocus="" required="" aria-describedby="id_username_helptext" id="id_username">
       </div>
     </div>
 
@@ -24,7 +24,7 @@
             <li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li>
           </ul>
         </div>
-        <input class="form-control" type="password" name="password1" autocomplete="new-password" required="" aria-describedby="id_password1_helptext" id="id_password1">
+        <input style="width: 470px" class="form-control" type="password" name="password1" autocomplete="new-password" required="" aria-describedby="id_password1_helptext" id="id_password1">
       </div>
     </div>
 
@@ -32,11 +32,13 @@
       <div>
         <label for="id_password2">Password confirmation:</label>
         <div class="helptext" id="id_password2_helptext">Enter the same password as before, for verification.</div>
-        <input class="form-control" type="password" name="password2" autocomplete="new-password" required="" aria-describedby="id_password2_helptext" id="id_password2">
+        <input style="width: 470px" class="form-control" type="password" name="password2" autocomplete="new-password" required="" aria-describedby="id_password2_helptext" id="id_password2">
       </div>
     </div>
 
-    <button class="btn btn-default" type="submit">Sign Up</button>
+    <button class="btn btn-default btn-lg" type="submit">Sign Up</button>
   </form>
+
+  <a style="margin-top: 20px" class="btn-sm btn-default" href="{% url 'store:index' %}">Back</a>
 </div>
 {% endblock %}

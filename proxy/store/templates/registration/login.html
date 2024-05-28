@@ -3,7 +3,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="index-form">
+<div class="index-form rounded-box">
   <h2><b>Log In</b></h2>
   <form class="auth-form" method="post">
     {% csrf_token %}
@@ -19,6 +19,10 @@
 <!--    {{ form }}-->
 
     <button class="btn btn-default" type="submit">Log In</button>
+
+    <a style="margin-top: 20px" class="btn-sm btn-default" href="{% url 'store:index' %}">Back</a>
   </form>
 </div>
+
+
 {% endblock %}

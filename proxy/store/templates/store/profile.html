@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="index-form center-block">
+    <div class="product-item panel panel-default">
+        <div class="panel-body">
+            <div class="center-block" style="font-size: 35px">
+                <span class="glyphicon glyphicon-user"></span>
+            </div>
+
+            <p><b>Username</b>: {{ user.username }}</p>
+            <p><b>Email</b>: {{ user.email }}</p>
+            <p><b>Balance</b>: {{ user.balance }}$</p>
+
+            <form class="center-block" action="{% url 'password_change' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-index-form">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
+    <a style="font-size: 30px;" href="{% url 'store:index' %}">
+        <span class="glyphicon glyphicon-home"></span>
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} {{ product.name }} {% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+{% include 'messages.html' %}
+
+<div class="index-form center-block">
+    <ul style="list-style-type: none;">
+        <li style="max-width: 550px; max-height: 800px" class="panel panel-default">
+            <div class="panel-heading">
+                <h4><strong>{{ product.name }}</strong></h4>
+            </div>
+            <div class="panel-body">
+                <p>{{ product.description }}</p>
+                <p><i>Status</i>: {{ product.status }}</p>
+                <p><i>In stock</i>: {{ product.in_stock }}</p>
+                <p><i>Customer</i>: {{ product.customer }}</p>
+                <p><i>Price per one</i>: {{ product.price }}</p>
+                <form action="{% url 'store:buy_product' product.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" style="display: block; margin: auto" class="btn btn-default btn-index-form">Buy</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+<!--    {% for error in errors %}-->
+<!--    <div>-->
+<!--        <p class="lead">{{ error }}</p>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+</div>
+
+{% endblock %}

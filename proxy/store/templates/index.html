@@ -5,45 +5,41 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><p class="navbar-text">Hello, {{ user.username }}</p></li>
+{% include 'navbar.html' %}
 
-                <li><p class="navbar-text">Your balance: {{ user.balance }}$</p></li>
-            </ul>
-
-            <form class="navbar-form navbar-right" action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Log Out</button>
-            </form>
-        </div>
-    </div>
-</nav>
-
-<div class="center-block">
-    <ul>
+<div class="center-block container">
+    <div class="row">
         {% for element in proxies %}
-        <li style="max-width: 350px" class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><strong>{{ element.name }}</strong></h3>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div style="height: 270px; overflow-y: auto;" class="product-item panel panel-default">
+                <div class="panel-heading">
+                    <a href="{% url 'store:detailed_product' element.id %}" class="panel-title link" style="cursor: pointer"><strong>{{ element.name }}</strong></a>
+                </div>
+                <div class="panel-body">
+                    <p>{{ element.description }}</p>
+                    <p><i>Status</i>: {{ element.status }}</p>
+                    <p><i>In stock</i>: {{ element.in_stock }}</p>
+                    <p><i>Customer</i>: {{ element.customer }}</p>
+                    <p><i>Price</i>: {{ element.price }}</p>
+                </div>
             </div>
-            <div class="panel-body">
-                <p>{{ element.description }}</p>
-                <p><i>Status</i>: {{ element.status }}</p>
-                <p><i>In stock</i>: {{ element.in_stock }}</p>
-                <p><i>Customer</i>: {{ element.customer }}</p>
-            </div>
-        </li>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 
+<script src=
+"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity=
+"sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous">
+    </script>
+
 {% else %}
-<div class="index-form">
-    <a class="btn btn-default btn-index-form" href="{% url 'login' %}">Log In</a>
-    <a class="btn btn-default btn-index-form" href="{% url 'store:signup' %}">Register</a>
+<div class="index-form rounded-box">
+    <h1 style="color: #333; margin-bottom: 20px">Proxy Store</h1>
+    <a style="width: 240px; height: 50px" class="btn btn-default btn-index-form" href="{% url 'login' %}">Log In</a>
+    <a style="width: 240px; height: 50px" class="btn btn-default btn-index-form" href="{% url 'store:signup' %}">Register</a>
 </div>
 {% endif %}
 {% endblock %}
