@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+from config import get_env_key
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@-ls9jv7y1c##j0(4)^m**s)5+jb00u7(q@z=w4!j4a1$*gcxf'
+SECRET_KEY = get_env_key("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,11 +77,11 @@ WSGI_APPLICATION = 'proxy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'proxies',
-        'USER': 'postgres',
-        'PASSWORD': 'sanya2004',
-        'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
-        'PORT': '5432',
+        'NAME': 'blog',
+        'USER': get_env_key("DATABASE_USER"),
+        'PASSWORD': get_env_key("DATABASE_PASSWORD"),
+        'HOST': get_env_key("DATABASE_HOST"),  # Or an IP Address that your DB is hosted on
+        'PORT': get_env_key("DATABASE_PORT"),
     }
 }
 
